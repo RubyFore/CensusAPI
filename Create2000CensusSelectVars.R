@@ -1,7 +1,7 @@
 
 # ------ Creating a rich SPDF dataset using Tigris and the Census API ---------
 
-
+# explain what this script performs. 
 
 
 # ----- Assembling the URL ----------------------------------------------------
@@ -13,6 +13,8 @@ library(sp)
 
 # Variable Codes are found in the census summary file at https://www.census.gov/prod/cen2000/doc/sf1.pdf. 
 # Variable names can change from year to year and are very similar, so be careful! 
+
+# TODO Explain what these variables are. 
 
 varCodes2000 <- c('P001001', 'P003001', 'P003003', 'P003004', 'P003005', 'P003006', 'P003007', 'P003008', 'P003009', 
                   'P004001', 'P004002', 'P004003', 'P014001', 'P005001')
@@ -73,7 +75,7 @@ USCounties2000 <- tigris::counties(state=stateCodes)
 
 
 rownames(data2000) <- data2000$GEOID
-reorderedData2000 <- data2000[USCounties20002010@data$GEOID,]
+reorderedData2000 <- data2000[USCounties2000@data$GEOID,]
 
 
 # Combining dowloaded and augmented Census dataset with spatial data frame. 
@@ -89,12 +91,5 @@ breaks <- c(0, .01, .03, .05, .1, .20, .5, 1)
 colorIndices <- .bincode(USCounties2000@data$percentHispanic, breaks=breaks)
 plot(USCounties2000, col=colors[colorIndices], lty=0)
 
-
-
-
-
-# save(data2000, file='~/Projects/SelectCensusData2000')
-
-# 
 
 
